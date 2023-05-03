@@ -38,11 +38,11 @@ export class MessageComponent {
     constructor(private messageServiceObj: MessageService){ }
     
     onDelete(){
-        this.messageServiceObj.deleteMessage(this.messageVarClasse);
+        //this.messageServiceObj.deleteMessage(this.messageVarClasse);
     }
     onEdit() {
         //alert("Tà funcionando!")
-        this.editClicked_MessageMetodoClasse.emit("Texto veio de message (child) para o (pai)");
-        this.editClicked_MessageMetodoClasseAlias.emit("Texto veio de message (child) para o (pai) Alias");
+        //this.editClicked_MessageMetodoClasse.emit("Texto veio de message (child) para o (pai)");
+        //this.editClicked_MessageMetodoClasseAlias.emit("Texto veio de message (child) para o (pai) Alias");
     }
 }

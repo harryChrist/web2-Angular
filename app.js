@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/messages', messaRoutes);
+app.use('/message', messaRoutes);
 app.use('/', appRoutes);
 app.use('/authenticacao', userRoutes);
 

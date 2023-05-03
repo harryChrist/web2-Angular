@@ -1,15 +1,54 @@
-import { Message } from "./message.model";
+import { Injectable } from "@angular/core";
+import { Http, Response, Headers } from "@angular/http";
+import 'rxjs/Rx';
+import { Observable } from "rxjs";
 
+import { Message } from "./message.model";
+import { AuthService } from "../auth/auth.service";
+
+@Injectable()
 export class MessageService{
     private messageSService: Message [] = [];
 
-    addMessage(message: Message){
-        this.messageSService.push(message);
-        console.log(this.messageSService);
+    constructor(private http: Http, private authService: AuthService) { }
+
+    addMessage(content: string) {
+        const session = this.authService.getSession();
+        const token = session ? 'Bearer ' + session.token : null
+
+        const bodyReq = JSON.stringify({content});
+        const myHeaders = new Headers({ 
+            'Content-Type': 'application/json',
+            'authorization': token
+        });
+        return this.http.post('http://localhost:3000/message/', bodyReq, { headers: myHeaders })
+            .map((responseRecebida: Response) => {
+                const response = responseRecebida.json()
+
+                const {content, user, _id } = response.messageSaved
+                const message = new Message(content, user.username, _id, user._id);
+                this.messageSService.push(message);
+                
+                return response
+            })
+            .catch((errorRecebido: Response) => Observable.throw(errorRecebido.json()));
     }
 
-    getMessages(){
-        return this.messageSService;
+    getMessages() {
+        return this.http.get('http://localhost:3000/message/')
+            .map((responseRecebida: Response) => {
+                const responseEmJSON = responseRecebida.json();
+                const messageSResponseRecebida = responseEmJSON.objSMessageSRecuperadoS;
+                let transfomedCastMessagesModelFrontend: Message[] = [];
+                for(let msg of messageSResponseRecebida) {
+                    transfomedCastMessagesModelFrontend.push(
+                        new Message(msg.content, msg.user.username, msg._id, msg.user._id)
+                    )
+                }
+                this.messageSService = transfomedCastMessagesModelFrontend;
+                return transfomedCastMessagesModelFrontend;
+            })
+            .catch((errorRecebido: Response) => Observable.throw(errorRecebido.json()));
     }
 
     deleteMessage(message:Message){
