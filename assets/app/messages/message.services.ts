@@ -21,6 +21,8 @@ export class MessageService{
             'Content-Type': 'application/json',
             'authorization': token
         });
+
+        console.log(myHeaders)
         return this.http.post('http://localhost:3000/message/', bodyReq, { headers: myHeaders })
             .map((responseRecebida: Response) => {
                 const response = responseRecebida.json()
