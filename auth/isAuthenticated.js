@@ -3,7 +3,6 @@ const User = require("../models/user");
 
 module.exports = async (req, res, next) => {
   const { authorization } = req.headers;
-
   // Se não tiver
   if (!authorization) {
     return res.status(401).json({
@@ -12,15 +11,15 @@ module.exports = async (req, res, next) => {
   }
 
   const [, token] = authorization.split(" ");
+  
 
   try {
-    const data = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, firstName } = data;
+    const data = jwt.verify(token, "daniel123");
+    const { id, email } = data;
 
     // Busca no banco
     const user = await User.findOne({
-      _id: id,
-      firstName,
+      email:email,
     });
 
     if (!user) {
@@ -30,7 +29,8 @@ module.exports = async (req, res, next) => {
     }
 
     req.userId = id;
-    req.userUsername = firstName;
+    req.userUsername = user.firstName;
+
     return next();
   } catch (e) {
     return res.status(401).json({

@@ -13,7 +13,7 @@ var userRoutes = require('./routes/user')
 
 
 var app = express();
-mongoose.connect("mongodb+srv://Harry:1234@cluster0.4lits.mongodb.net/sexo?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://Harry:1234@cluster0.4lits.mongodb.net/RosaLenda?retryWrites=true&w=majority");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

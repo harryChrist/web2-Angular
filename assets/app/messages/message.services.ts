@@ -22,29 +22,29 @@ export class MessageService{
             'authorization': token
         });
 
-        console.log(myHeaders)
-        return this.http.post('http://localhost:3000/message/', bodyReq, { headers: myHeaders })
+        return this.http.post('http://localhost:3000/message/add', bodyReq, { headers: myHeaders })
             .map((responseRecebida: Response) => {
-                const response = responseRecebida.json()
+                return console.log(responseRecebida)
+                /*const response = responseRecebida.json()
 
                 const {content, user, _id } = response.messageSaved
                 const message = new Message(content, user.username, _id, user._id);
                 this.messageSService.push(message);
                 
-                return response
+                return response*/
             })
-            .catch((errorRecebido: Response) => Observable.throw(errorRecebido.json()));
+            .catch((errorRecebido: Response) => Observable.throw(console.log(errorRecebido.json())));
     }
 
     getMessages() {
-        return this.http.get('http://localhost:3000/message/')
+        return this.http.get('http://localhost:3000/message/pegar')
             .map((responseRecebida: Response) => {
                 const responseEmJSON = responseRecebida.json();
                 const messageSResponseRecebida = responseEmJSON.objSMessageSRecuperadoS;
                 let transfomedCastMessagesModelFrontend: Message[] = [];
                 for(let msg of messageSResponseRecebida) {
                     transfomedCastMessagesModelFrontend.push(
-                        new Message(msg.content, msg.user.username, msg._id, msg.user._id)
+                        new Message(msg.content, msg.user.firstName + " " + msg.user.lastName, msg._id, msg.user._id)
                     )
                 }
                 this.messageSService = transfomedCastMessagesModelFrontend;

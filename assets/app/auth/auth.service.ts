@@ -18,7 +18,7 @@ export class AuthService {
     signup(user: User) {
         const bodyReq = JSON.stringify(user);
         const myHeaders = new Headers({ 'Content-Type': 'application/json' });
-        console.log(user)
+        
         return this.http.post('http://localhost:3000/authenticacao/signup', bodyReq, { headers: myHeaders })
             .map((responseRecebida: Response) => {
                 alert("Sua conta foi criada! =) Se fodeu, tenho seus dados.")

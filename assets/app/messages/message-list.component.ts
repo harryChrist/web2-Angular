@@ -19,18 +19,13 @@ export class MessageListComponent implements OnInit {
 
     constructor(private messageService: MessageService) {}
 
-    messageS: Message[] = [
-        new Message("user1", "Texto 1", "", ""),
-        new Message("user2", "Texto 2", "", ""),
-    ]
+    messageS: Message[] = []
 
     ngOnInit(): void {
         this.messageService.getMessages()
         .subscribe(
-                (dadosSucesso: Message[]) => {
-                    this.messageS = dadosSucesso;
-                    console.log(dadosSucesso)
-                },
+                (dadosSucesso: Message[]) => {console.log(dadosSucesso); this.messageS = dadosSucesso;}
+                ,
                 dadosErro => console.log(dadosErro)
             )
     }

@@ -11,6 +11,8 @@ router.post("/signup", async function (req, res) {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
+      birthday: req.body.birthday,
+      genre: req.body.genre,
     });
   
     try {
@@ -51,7 +53,7 @@ router.post("/login", async function (req, res) {
     }
   
     const { id, firstName } = user;
-    const token = jwt.sign({ id, firstName }, "daniel123", {
+    const token = jwt.sign({ id, email:user.email }, "daniel123", {
       expiresIn: 1200,
     });
   

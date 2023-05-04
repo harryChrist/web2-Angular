@@ -12,8 +12,12 @@ export class MessageInputComponent{
 
     constructor(private messageService: MessageService){}
 
-    onSave(textoConsole: string){
-        this.messageService.addMessage(textoConsole);
-        console.log(textoConsole);
+    onSubmit(form: NgForm){
+        this.messageService.addMessage(form.value.myContentngForm)
+            .subscribe(
+                dadosSucesso => console.log(dadosSucesso),
+                dadosErro => alert(dadosErro.error)
+            );
+        form.resetForm();
     }
 }

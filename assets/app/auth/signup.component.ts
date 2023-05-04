@@ -17,10 +17,12 @@ export class SignupComponent implements OnInit {
     onSubmit() {
         let userInfo = this.myForm.value
         const user = new User(
-            userInfo.emailTS,
-            userInfo.passwordTS,
-            userInfo.firstNameTS,
-            userInfo.lastNameTS,
+            this.myForm.value.emailTS,
+            this.myForm.value.passwordTS,
+            this.myForm.value.firstNameTS,
+            this.myForm.value.lastNameTS,
+            this.myForm.value.birthdayTS,
+            this.myForm.value.genreTS,
         )
         this.authService.signup(user).subscribe(
             dadosSucesso => console.log(dadosSucesso),
@@ -32,6 +34,9 @@ export class SignupComponent implements OnInit {
         this.myForm = new FormGroup({
             firstNameTS: new FormControl(null, Validators.required),
             lastNameTS: new FormControl(null, Validators.required),
+            genreTS: new FormControl(null, Validators.required),
+            birthdayTS: new FormControl(null, Validators.required),
+            termsTS: new FormControl(null, Validators.required),
             emailTS: new FormControl(null, [
                 Validators.required,
                 Validators.pattern("[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+")

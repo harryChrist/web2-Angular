@@ -5,8 +5,7 @@ var Message = require("../models/message"); // pegando o Schema Message do Banco
 const User = require("../models/user");
 const ensureAuthenticated = require("../auth/isAuthenticated");
 
-router.get("/", async function (req, res) {
-  console.log(10)
+router.get("/pegar", async function (req, res) {
   try {
     const messages = await Message.find();
     const messagesComplete = await Promise.all(
@@ -29,11 +28,7 @@ router.get("/", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res, next) {
-  console.log(req)
-})
-
-/*router.post("/", ensureAuthenticated, async function (req, res, next) {
+router.post("/add", ensureAuthenticated, async function (req, res, next) {
   console.log(req.body)
   try {
     var message = new Message({
@@ -62,6 +57,6 @@ router.post("/", async function (req, res, next) {
       myError: e,
     });
   }
-});*/
+});
 
 module.exports = router; 
