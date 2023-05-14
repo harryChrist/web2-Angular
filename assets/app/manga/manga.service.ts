@@ -60,6 +60,20 @@ export class MangaService {
 
   addAuthors() {}
 
+  getGenres() {
+    return this.http
+      .get("http://localhost:3000/genre/getGenres")
+      .subscribe(
+        (response) => {
+          const jsonData = response; // Faça algo com a resposta do servidor
+          console.log(jsonData);
+        },
+        (error) => {
+          console.error(error); // Trate qualquer erro que ocorrer
+        }
+      );
+  }
+
   addGenres() {
     return new Promise((resolve, reject) => {
       // anime?q=${text.split(" ").join("+")}&limit=18
@@ -70,7 +84,7 @@ export class MangaService {
           for (let index = 0; index < jsonData.data.length; index++) {
             const element = jsonData.data[index];
             this.http
-              .post("http://localhost:3000/manga/createGenre", element)
+              .post("http://localhost:3000/genre/createGenre", element)
               .subscribe(
                 (response) => {
                   const jsonData = response; // Faça algo com a resposta do servidor

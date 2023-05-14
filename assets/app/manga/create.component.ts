@@ -54,7 +54,7 @@ export class CreateComponent {
 
   toCreate() {
     this.mangaService.addManga(this.apiData[this.selectedItem])
-    //this.mangaService.addGenres()
+    //this.mangaService.getGenres()
   }
 
   ngOnInit() {}
