@@ -23,7 +23,7 @@ export class MangaList {
       .subscribe(
         (data) => {
           this.Data = data;
-          console.log('Lista de itens:', this.Data);
+          console.log(data)
           // Faça algo com a lista de itens aqui
         },
         (error) => {

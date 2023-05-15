@@ -13,10 +13,11 @@ import { myrouting } from './app.routing';
 import { SigninComponent } from './auth/signin.component';
 import { SignupComponent } from './auth/signup.component';
 import { LogoutComponent } from './auth/logout.component';
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from './header/header.component';
 import { MangaComponent } from './manga/manga.component';
 import { CreateComponent } from './manga/create.component';
 import { MangaList } from './manga/list-component';
+import { LivroComponent } from './manga/livro-component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { MangaList } from './manga/list-component';
         MangaComponent,
         CreateComponent,
         MangaList,
+        LivroComponent,
     ],
     imports: [BrowserModule, FormsModule, myrouting, ReactiveFormsModule, HttpModule],
     bootstrap: [AppComponent]

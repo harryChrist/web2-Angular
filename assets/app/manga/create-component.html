@@ -1,80 +1,56 @@
-<h1>Create Manga</h1>
-<div class="col-md-8 col-md-offset-2">
-  <input [(ngModel)]="inputText" (ngModelChange)="onInputChange()" placeholder="Digite algo" />
+<h1>Criar Livros</h1>
+
+<div id="book-form" class="book-form">
+  <label>Procurar:</label>
+  <input type="text" [(ngModel)]="inputText" (ngModelChange)="onInputChange()" placeholder="Digite algo" />
+  <label>Opções:</label>
   <select class="form-select" [(ngModel)]="selectedItem" (change)="onSelectionChange($event.target.value)">
     <option *ngFor="let item of apiData;let i = index" [value]="i">{{ item.title }}</option>
   </select>
+  <div class="book-form2" *ngIf="apiData && apiData.length > 0; else Loading">
+    <img id="cover-preview" [src]="apiData[selectedItem].images.jpg.image_url" alt="Preview da Capa do Livro"
+      class="limited-size">
 
-  <div *ngIf="apiData && apiData.length > 0; else Loading">
-    <div>
-      <label>Title:</label>
-      <label>{{apiData[selectedItem].title}}</label>
-    </div>
-    <div>
-      <label>Title Japanese:</label>
-      <label>{{apiData[selectedItem].title_japanese}}</label>
-    </div>
-    <div>
-      <label>Synopsis:</label>
-      <label>{{apiData[selectedItem].synopsis}}</label>
-    </div>
-    <div>
-      <label>Resume About:</label>
-      <label>{{apiData[selectedItem].background}}</label>
-    </div>
-    <div>
-      <label>chapters:</label>
-      <label>{{apiData[selectedItem].chapters}}</label>
-    </div>
-    <div>
-      <label>volumes:</label>
-      <label>{{apiData[selectedItem].volumes}}</label>
-    </div>
-    <div>
-      <label>status:</label>
-      <label>{{apiData[selectedItem].status}}</label>
-    </div>
-    <div>
-      <label>score:</label>
-      <label>{{apiData[selectedItem].score}}</label>
-    </div>
-    <div>
-      <label>published:</label>
-      <label>{{apiData[selectedItem].published.string}}</label>
-    </div>
-    <div>
-      <label>authors:</label>
-      <ul>
-        <li *ngFor="let author of apiData[selectedItem].authors">
-          {{ author.name }}
-        </li>
-      </ul>
-      <button (click)='toCreateAuthors()' class="btn btn-primary" type="submit" [disabled]="!apiData[selectedItem]">Criar</button>
-    </div>
-    <div>
-      <label>genres:</label>
-      <ul>
-        <li *ngFor="let genres of apiData[selectedItem].genres">
-          {{ genres.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <img src="{{apiData[selectedItem].images.jpg.image_url}}" alt="Minha Imagem">
-    </div>
+    <label for="title">Titulo:</label>
+    <input [value]="apiData[selectedItem].title" [disabled]="true" type="text" id="genre" name="genre">
 
-    <button (click)='toCreate()' class="btn btn-primary" type="submit" [disabled]="!apiData[selectedItem]">Criar</button>
+    <label for="book-title">Titulo Japones:</label>
+    <input [value]="apiData[selectedItem].title_japanese" [disabled]="true" type="text" id="book-title"
+      name="book-title">
+
+    <label for="genre">Gêneros:</label>
+    <input [value]="apiData[selectedItem].genres" [disabled]="true" type="text" id="genre" name="genre">
+
+    <label for="author">Autores:</label>
+    <input [value]="apiData[selectedItem].authors" [disabled]="true" type="text" id="author" name="author">
+
+    <button (click)='toCreateAuthors()' [disabled]="!apiData[selectedItem]" type="submit">Adicionar Autores</button>
+    
+    <label for="synopsis">Sinopse:</label>
+    <textarea [value]="apiData[selectedItem].synopsis" id="synopsis" name="synopsis" rows="5"></textarea>
+
+    <label for="synopsis">Resume About:</label>
+    <textarea [value]="apiData[selectedItem].background" id="background" name="background" rows="5"></textarea>
+
+    <label for="volumes">Volumes:</label>
+    <input [value]="apiData[selectedItem].volumes" [disabled]="true" type="number" id="volumes" name="volumes">
+
+    <label for="volumes">Publicado:</label>
+    <input [value]="apiData[selectedItem].published.string" [disabled]="true" type="string" id="published"
+      name="published">
+
+    <label for="chapters">Capítulos:</label>
+    <input [value]="apiData[selectedItem].chapters" [disabled]="true" type="number" id="chapters" name="chapters">
+
+    <label for="estoque">Quantidade em estoque:</label>
+    <input [(ngModel)]="quantity" (ngModelChange)="onChangeQuantity()" type="number" id="estoque" name="estoque"
+      required>
+
+    <label for="valor">Valor do Livro:</label>
+    <input [(ngModel)]="price" (ngModelChange)="onChangePrice()" type="number" id="valor" name="valor" step="0.01"
+      min="0" required>
+
+
+    <button (click)='toCreate()' [disabled]="!apiData[selectedItem]" type="submit">Criar Livro</button>
   </div>
-  <div *Loading>
-    Carregando...
-  </div>
-
-  <!--<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" class="form-control" formControlName="nameTS">
-            <input [(ngModel)]="inputText" (ngModelChange)="onInputChange()" placeholder="Digite algo">
-        </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Logar</button>
-    </form>-->
 </div>

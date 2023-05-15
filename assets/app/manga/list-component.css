@@ -1,83 +1,27 @@
-/* Definindo a fonte padrão para o site */
-body {
-    font-family: Arial, sans-serif;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  margin: 20px; /* Adicione a margem desejada */
 }
 
-/* Estilo para o cabeçalho */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+.grid-item {
+  border: 1px solid #ddd;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza a imagem verticalmente */
+  text-align: left; /* Alinha o texto à esquerda */
 }
 
-/* Estilo para o título do site */
-h1 {
-    margin: 0;
+.grid-item img {
+  display: block;
+  margin: 0 auto; /* Centraliza a imagem horizontalmente */
+  margin-bottom: 10px; /* Adicione espaço entre a imagem e o título */
 }
 
-/* Estilo para o menu de navegação */
-nav {
-    background-color: #f2f2f2;
-    padding: 10px;
-}
-
-/* Estilo para os links do menu de navegação */
-nav a {
-    color: #333;
-    text-decoration: none;
-    padding: 10px;
-}
-
-nav a:hover {
-    background-color: #333;
-    color: #fff;
-}
-
-/* Estilo para o conteúdo principal do site */
-main {
-    margin: 20px;
-}
-
-/* Estilo para os cards dos livros */
-.book-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-    height: 300px;
-}
-
-.book-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.book-card h2 {
-    font-size: 1.2rem;
-    margin: 10px 0;
-}
-
-.book-card p {
-    font-size: 1rem;
-    margin: 10px 0;
-}
-
-/* Estilo para o conteúdo principal do site */
-.main {
-    margin: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-/* Estilo para os cards dos livros */
-.book-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-    width: calc(33.33% - 20px);
-    max-width: 300px;
-    height: 300px;
-    box-sizing: border-box;
+.grid-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }

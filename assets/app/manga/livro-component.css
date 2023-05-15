@@ -1,0 +1,97 @@
+/* Definindo a fonte padrão para o site */
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+/* Estilo para o título do site */
+h1 {
+    margin: 0;
+}
+
+/* Estilo para o conteúdo principal do site */
+main {
+    margin: 20px;
+}
+
+/* Estilo para os cards dos livros */
+.book-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 300px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+.book-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.book-card h2 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.book-card p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* Estilo para o container das informações do livro */
+.container {
+    width: 600px;
+    margin: 0 auto;
+}
+
+/* Estilo para as informações do livro */
+.livro-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.livro-info img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.livro-dados {
+    width: 60%;
+}
+
+.livro-dados h2 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.livro-dados h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.livro-dados p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.livro-dados form {
+    margin-top: 20px;
+}
+
+.livro-dados button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.livro-dados button:hover {
+    background-color: #fff;
+    color: #333;
+}

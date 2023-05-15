@@ -1,0 +1,22 @@
+<main>
+  <div class="container livro-info" *ngIf="Data;">
+    <img [src]="Data.images[0].jpg.image_url" alt="Capa do Livro">
+    <div class="livro-dados">
+      <h2>{{Data.title}}</h2>
+      <h3>Titulo Japonês: {{Data.title_janapese}}</h3>
+      <h3>Autores: {{Data.authores}}</h3>
+      <p class="preco-livro">Preço: R$ {{Data.price}}</p>
+      <p class="preco-livro">Quantidade: R$ {{Data.quantity}}</p>
+      <p>Gênero: {{Data.genres}}</p>
+      <p>Sinopse: {{Data.synopsis}}</p>
+      <p>Volumes: {{Data.volumes}}</p>
+      <p>Capítulos: {{Data.chapters}}</p>
+      <p>Publicado: {{Data.published[0].string}}</p>
+      <button (click)='DeleteLivro()' [routerLink]="['/list']" class="btn btn-primary" type="submit">Deletar</button>
+    </div>
+  </div>
+
+  <div class="container livro-info" *ngIf="!Data">
+    <h2>Não há nada aqui!</h2>
+  </div>
+</main>

@@ -1,32 +1,11 @@
-<div class="main">
-    <div class="book-card">
-        <img src="https://cdn.discordapp.com/attachments/882712138035113994/1107445908137836615/BERNARDO_COXINHA.jpg"
-            alt="Livro 1">
-        <h2>Título do Livro 1</h2>
-        <p>Autor do Livro 1</p>
-        <p>Preço: R$ 20,00</p>
-    </div>
-
-    <div class="book-card">
-        <img src="https://cdn.discordapp.com/attachments/882712138035113994/1107445908137836615/BERNARDO_COXINHA.jpg"
-            alt="Livro 2">
-        <h2>Título do Livro 2</h2>
-        <p>Autor do Livro 2</p>
-        <p>Preço: R$ 25,00</p>
-    </div>
-
-    <div class="book-card">
-        <img src="https://cdn.discordapp.com/attachments/882712138035113994/1107445908137836615/BERNARDO_COXINHA.jpg"
-            alt="Livro 3">
-        <h2>Título do Livro 3</h2>
-        <p>Autor do Livro 3</p>
-        <p>Preço: R$ 30,00</p>
-    </div>
-    <div class="book-card">
-        <img src="https://cdn.discordapp.com/attachments/882712138035113994/1107445908137836615/BERNARDO_COXINHA.jpg"
-            alt="Livro 3">
-        <h2>Título do Livro 3</h2>
-        <p>Autor do Livro 3</p>
-        <p>Preço: R$ 30,00</p>
-    </div>
+<div class="grid-container">
+  <div class="grid-item" *ngFor="let livro of Data">
+    <img [src]="livro.images[0].jpg.image_url" alt="Imagem">
+    <h2>{{ livro.title }}</h2>
+    <p class="price">Preço: R$ {{ livro.price }}</p>
+    <p class="authors">{{ livro.author_info[0].name }}</p>
+    <p class="synopsis">Score: {{ livro.score }}</p>
+    <p class="synopsis">Status: {{ livro.status }}</p>
+    <a [routerLink]="['/manga', livro._id]">Botao</a>
+  </div>
 </div>

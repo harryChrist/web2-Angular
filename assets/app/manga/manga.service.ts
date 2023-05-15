@@ -10,15 +10,17 @@ const api = "https://api.jikan.moe/v4/";
 export class MangaService {
   constructor(private http: Http) {}
 
-
   getMangas() {
-    return this.http.get('http://localhost:3000/manga/getMangas')
-        .map((responseRecebida: Response) => {
-            const responseEmJSON = responseRecebida.json();
-            const messageSResponseRecebida = responseEmJSON.objSMessageSRecuperadoS;
-        })
-        .catch((errorRecebido: Response) => Observable.throw(errorRecebido.json()));
-}
+    return this.http
+      .get("http://localhost:3000/manga/getMangas")
+      .map((responseRecebida: Response) => {
+        const jsonData = responseRecebida.json();
+        return jsonData.mangas;
+      })
+      .catch((errorRecebido: Response) =>
+        Observable.throw(errorRecebido.json())
+      );
+  }
 
   getManga(name: String): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -33,6 +35,31 @@ export class MangaService {
         }
       );
     });
+  }
+
+  getMangaById(id: Number) {
+    return this.http
+      .get("http://localhost:3000/manga/getMangaById/"+id, )
+      .map((responseRecebida: Response) => {
+        const jsonData = responseRecebida.json();
+        return jsonData.mangas;
+      })
+      .catch((errorRecebido: Response) =>
+        Observable.throw(errorRecebido.json())
+      );
+  }
+
+  deleteMangaById(id: Number) {
+    return this.http
+      .delete("http://localhost:3000/manga/deleteMangaById/"+id, )
+      .map((responseRecebida: Response) => {
+        const jsonData = responseRecebida.json();
+        alert(jsonData.message)
+        return jsonData.message;
+      })
+      .catch((errorRecebido: Response) =>
+        Observable.throw(errorRecebido.json())
+      );
   }
 
   addManga(manga: any) {
@@ -91,6 +118,18 @@ export class MangaService {
         }
       );
     });
+  }
+
+  getAuthorById(id: Number) {
+    return this.http
+      .get("http://localhost:3000/author/getAuthorById/"+id, )
+      .map((responseRecebida: Response) => {
+        const jsonData = responseRecebida.json();
+        return jsonData.mangas;
+      })
+      .catch((errorRecebido: Response) =>
+        Observable.throw(errorRecebido.json())
+      );
   }
 
   getGenres() {

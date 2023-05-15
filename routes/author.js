@@ -30,4 +30,28 @@ router.post("/createAuthor", async function (req, res) {
     }
 });
 
+router.get("/getAuthorById/:id", async function (req, res) {
+    const itemId = req.params.id
+  
+    try {
+      Author.findOne({ _id: Number(itemId) }, (err, item) => {
+        if (err) {
+          console.error('Erro ao buscar o item:', err);
+        } else {
+          if (item) {
+            return res.status(200).json({
+              myMsgSucess: "Mensagem recuperada com sucesso.",
+              mangas: item,
+            });
+          }
+        }
+      })
+    } catch (e) {
+      return res.status(500).json({
+        myErroTitle: "Um erro aconteceu na hora de buscar a mensagem",
+        myError: e,
+      });
+    }
+  });
+
 module.exports = router;

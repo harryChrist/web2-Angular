@@ -16,10 +16,16 @@ import { MangaService } from "./manga.service";
 export class CreateComponent {
   //myForm: FormGroup;
   inputText: string;
+  quantity: number;
+  price: number;
+
   apiData: any[];
   selectedItem: any;
 
+  isBloqueado: boolean = false;
+
   private inputSubject: Subject<string> = new Subject<string>();
+  private inputSubjectNumber: Subject<number> = new Subject<number>();
 
   constructor(private mangaService: MangaService, private http: Http) {
     this.inputSubject
@@ -40,11 +46,30 @@ export class CreateComponent {
             alert("Erro na Api");
           });
       });
+      this.inputSubjectNumber.pipe(
+        debounceTime(10),
+        distinctUntilChanged()
+      ).subscribe((value: number) => {
+        let local = this.apiData[this.selectedItem]
+        local.price = this.price;
+        local.quantity = this.quantity;
+      })
+      this.isBloqueado = this.selectedItem ? true : false
   }
 
   onInputChange() {
     this.inputSubject.next(this.inputText);
   }
+
+  onChangePrice() {
+    this.inputSubjectNumber.next(this.price);
+    console.log(this.price)
+  }
+
+  onChangeQuantity() {
+    this.inputSubjectNumber.next(this.quantity);
+    console.log(this.quantity)
+  };
 
   onSelectionChange(index) {
     this.selectedItem = index;
@@ -54,6 +79,7 @@ export class CreateComponent {
 
   toCreate() {
     this.mangaService.addManga(this.apiData[this.selectedItem]);
+    //this.mangaService.addGenres();
   }
 
   toCreateAuthors() {

@@ -13,6 +13,8 @@ var schema = new Schema({
     volumes: {type: Number},
     status:{ type: String },
     synopsis: {type: String, required: true},
+    price: {type: Number, required: true,},
+    quantity: {type: Number, required: true},
     littleText: {type: String}, // background - texto representativo
     published: {type: Array},
     score: {type: Number},
