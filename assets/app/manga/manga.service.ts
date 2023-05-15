@@ -10,6 +10,16 @@ const api = "https://api.jikan.moe/v4/";
 export class MangaService {
   constructor(private http: Http) {}
 
+
+  getMangas() {
+    return this.http.get('http://localhost:3000/manga/getMangas')
+        .map((responseRecebida: Response) => {
+            const responseEmJSON = responseRecebida.json();
+            const messageSResponseRecebida = responseEmJSON.objSMessageSRecuperadoS;
+        })
+        .catch((errorRecebido: Response) => Observable.throw(errorRecebido.json()));
+}
+
   getManga(name: String): Promise<any> {
     return new Promise((resolve, reject) => {
       // anime?q=${text.split(" ").join("+")}&limit=18
@@ -58,20 +68,41 @@ export class MangaService {
 
   addCharacter() {}
 
-  addAuthors() {}
-
-  getGenres() {
-    return this.http
-      .get("http://localhost:3000/genre/getGenres")
-      .subscribe(
-        (response) => {
-          const jsonData = response; // Faça algo com a resposta do servidor
-          console.log(jsonData);
+  addAuthors(authors: Number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // anime?q=${text.split(" ").join("+")}&limit=18
+      this.http.get(api + "people/" + authors + "/full").subscribe(
+        (data) => {
+          const element = data.json();
+          this.http
+            .post("http://localhost:3000/author/createAuthor", element.data)
+            .subscribe(
+              (response) => {
+                const jsonData = response; // Faça algo com a resposta do servidor
+                console.log(jsonData);
+              },
+              (error) => {
+                console.error(error); // Trate qualquer erro que ocorrer
+              }
+            );
         },
         (error) => {
-          console.error(error); // Trate qualquer erro que ocorrer
+          reject(error); // Rejeita a Promise com o erro, se houver
         }
       );
+    });
+  }
+
+  getGenres() {
+    return this.http.get("http://localhost:3000/genre/getGenres").subscribe(
+      (response) => {
+        const jsonData = response; // Faça algo com a resposta do servidor
+        console.log(jsonData);
+      },
+      (error) => {
+        console.error(error); // Trate qualquer erro que ocorrer
+      }
+    );
   }
 
   addGenres() {

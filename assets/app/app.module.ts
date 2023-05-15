@@ -16,6 +16,7 @@ import { LogoutComponent } from './auth/logout.component';
 import { HeaderComponent } from './header.component';
 import { MangaComponent } from './manga/manga.component';
 import { CreateComponent } from './manga/create.component';
+import { MangaList } from './manga/list-component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { CreateComponent } from './manga/create.component';
         LogoutComponent,
         MangaComponent,
         CreateComponent,
+        MangaList,
     ],
     imports: [BrowserModule, FormsModule, myrouting, ReactiveFormsModule, HttpModule],
     bootstrap: [AppComponent]

@@ -11,6 +11,7 @@ var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
 var mangaRoutes = require('./routes/manga');
 var genreRoutes = require('./routes/genre');
+var authorRoutes = require('./routes/author');
 
 
 var app = express();
@@ -38,6 +39,7 @@ app.use(function (req, res, next) {
 app.use('/', appRoutes);
 app.use('/manga', mangaRoutes);
 app.use('/genre', genreRoutes);
+app.use('/author', authorRoutes);
 app.use('/authenticacao', userRoutes);
 
 // catch 404 and forward to error handler

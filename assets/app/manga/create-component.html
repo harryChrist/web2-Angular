@@ -49,12 +49,13 @@
           {{ author.name }}
         </li>
       </ul>
+      <button (click)='toCreateAuthors()' class="btn btn-primary" type="submit" [disabled]="!apiData[selectedItem]">Criar</button>
     </div>
     <div>
       <label>genres:</label>
       <ul>
-        <li *ngFor="let author of apiData[selectedItem].genres">
-          {{ author.name }}
+        <li *ngFor="let genres of apiData[selectedItem].genres">
+          {{ genres.name }}
         </li>
       </ul>
     </div>

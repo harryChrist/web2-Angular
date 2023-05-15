@@ -17,8 +17,8 @@ var schema = new Schema({
     published: {type: Array},
     score: {type: Number},
     //characters: [{ type: Schema.Types.ObjectId, ref: 'Character' }],
-    genres: [{ type: Schema.Types.ObjectId, ref: 'Genre' }],
-    authors: [{ type: Schema.Types.ObjectId, ref: 'Author' }],
+    genres: [{ type: Number, ref: 'Genre' }],
+    authors: [{ type: Number, ref: 'Author' }],
 });
 
 module.exports = mongoose.model('Manga', schema);

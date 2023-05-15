@@ -6,12 +6,12 @@ import { Http, Response, Headers } from "@angular/http";
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
-
 import { MangaService } from "./manga.service";
 
 @Component({
   selector: "manga-create",
   templateUrl: "./create-component.html",
+  styleUrls: ["./create-component.css"],
 })
 export class CreateComponent {
   //myForm: FormGroup;
@@ -37,7 +37,7 @@ export class CreateComponent {
             console.log(data);
           })
           .catch((error) => {
-            alert("Erro na Api")
+            alert("Erro na Api");
           });
       });
   }
@@ -53,8 +53,18 @@ export class CreateComponent {
   }
 
   toCreate() {
-    this.mangaService.addManga(this.apiData[this.selectedItem])
-    //this.mangaService.getGenres()
+    this.mangaService.addManga(this.apiData[this.selectedItem]);
+  }
+
+  toCreateAuthors() {
+    for (
+      let index = 0;
+      index < this.apiData[this.selectedItem].authors.length;
+      index++
+    ) {
+      const element = this.apiData[this.selectedItem].authors[index];
+      this.mangaService.addAuthors(element.mal_id);
+    }
   }
 
   ngOnInit() {}
